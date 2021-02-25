@@ -1,5 +1,5 @@
-# Lab X
+# Lab 02
 
-> Edit this file and describe in a few words what you've done in this lab.
+> i installed git and,with some help, made it work 
 
 
