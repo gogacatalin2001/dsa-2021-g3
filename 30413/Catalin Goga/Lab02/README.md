@@ -1,5 +1,5 @@
-# Lab X
+# Lab 02
 
-> Edit this file and describe in a few words what you've done in this lab.
+> I lerned how to use git(for starters) and started to learn about SLL. An update to the work will be soon made.
 
 
