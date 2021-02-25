@@ -1,5 +1,5 @@
-# Lab X
+# Lab 02
 
-> Edit this file and describe in a few words what you've done in this lab.
+> Today i leanred how to use git and push/pull 
 
 
