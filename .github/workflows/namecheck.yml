@@ -13,8 +13,8 @@ jobs:
   publish:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
-      - uses: dylanvann/check-pull-request-title@v1
+      - uses: actions/checkout@master
+      - uses: dylanvann/check-pull-request-title@master
         with:
           # Match pull request titles in the form UI-1234 - Message.
           pattern: "(Lab)\\d\\d [a-z ,.'-]+"
