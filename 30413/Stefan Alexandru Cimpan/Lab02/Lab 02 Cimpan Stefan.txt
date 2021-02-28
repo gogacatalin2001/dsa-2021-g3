@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+int c=0,k=0,i,j,n;
+int Street[100];
+int Garage[100];
+
+void R(int n)
+{
+   Street[c]=n;
+   c++;
+}
+
+void E(int n)
+{
+        for(i=0;i<c;i++)
+            {
+            Street[i]=Street[i+1];
+            }
+            c--;
+    Garage[k]=n;
+    k++;
+}
+
+void X(int n)
+{
+    if(Garage[k]!=n)
+    {
+        printf("error: %d not on road!\n",n);
+    }else
+        {
+         for(i=0;i<c;i++)
+        {
+            Street[c-i+1]=Street[c-i];
+            }
+            Street[0]=n;
+            c++;
+            Garage[k]=0;
+            k--;
+        }
+
+}
+
+void S(int n)
+{
+    if(n==-2)
+    {
+        for(i=0;i<k;i++)
+        {
+           printf("%d ", Garage[i]);
+        }
+        printf("%\n");
+    }
+    if(n==-1)
+    {
+        for(i=0;i<c;i++)
+        {
+            printf("%d ", Street[i]);
+        }
+        printf("%\n");
+    }
+}
+
+int main()
+{
+    //r- place truck on road
+    //e-truck enters garage
+    //x-truck exits garage
+    //s(g,r)-trucks in garage close to the entry or on road
+    //error: 25 not on road!
+    //error: 10 not at exit!
+    //G=-2, R=-1
+    R(2);
+    R(5);
+    R(10);
+    R(9);
+    R(22);
+    S(-1);
+    S(-2);
+    E(2);
+    S(-1);
+    S(-2);
+    E(10);
+    E(25);
+    X(10);
+    X(2);
+    S(-1);
+    S(-2);
+    return 0;
+}
