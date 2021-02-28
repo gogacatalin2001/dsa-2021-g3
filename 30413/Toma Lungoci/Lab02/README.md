@@ -1,16 +1,16 @@
 # Lab 02
 
-lab 02: I have installed Git, learned how to use the GitHub platform and how to use them together to submit my work.
-SSL-> studied in depth the resources and managed to work with SSL, first by examining the code snippets and then by working on problems.
-worked first on the extra problmen because it seemed pretty straightforward (SSL operations presented in pdfs)
+I have installed Git, learned how to use the GitHub platform, how to use them together to submit my work.
 
-submitted the first problem.
-lab02_problem 1: for the functions i used mainly the ideas from the lab resources
-		the "garage" is basically a stack, so i implemented the push and pop operations on it
-		stored 	"road" as a normal SSL
-		file names in main arguments
-		struggled a bit in reading the instructions correclty
-		question: should we pay attention to the warning regarding the pointers (if we have a header cell and our pointer is of type "header cell" at first but it points afterwords to a "node"(head->first->next))?
-		i mean it could cause errors? program worked fine.
+SSL-> studied the lab resources and practiced the basic SSL operations, using the ideas from the code snippets.
+
+lab02_problem 1: For the SSL operations i have used functions similar with the ones presented in the labPDF,
+developed some auxiliary ones (to check if a truck is on the road, to convert a string to an int, to print the list).
+in/out files are passed as arguments to the main function (printed them to make sure they are read correclty).
+I have stored the "road" as a normal SSL; The "garage" is basically a stack, since it operates according to the LIFO algorithm,
+so i named my operations push, pop, top.
+
+lab02_problem 2: I mostly used the same functions as in the "problem 1", same ideas. This time around, the "garage" must operate FIFO,
+so i had to use a "addRear" function (enqueue) and a "deleteFirst"(dequeue)(i named it "out"). The structure of the program is the same as my first problem.
 
 

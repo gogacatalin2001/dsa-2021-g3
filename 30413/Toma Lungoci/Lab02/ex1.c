@@ -40,21 +40,6 @@ void push(ListT *ptr, truck *p ){
     ptr->last=p;
     ptr->count++;
 }
-truck* select(ListT* ptr, int id)
-{
-    truck *q=ptr->first;
-    while(q!=NULL)
-    {
-        if(q->truckID==id)
-        {
-            return q;
-        }
-        q=q->next;
-    }
-
-
-
-}
 
 truck *deleteLast(ListT*listPtr)
 {
@@ -146,6 +131,17 @@ int deleteByKey(ListT*listPtr, int key)
     }
     return 0;
 }
+int checkRoad(ListT *listPtr, int id)
+{
+    truck* q=listPtr->first;
+    while(q!=NULL)
+    {
+        if(q->truckID==id)
+            return 1;
+        q=q->next;
+    }
+    return 0;
+}
 void purge(ListT *listPtr)
 {
     truck* p;
@@ -182,12 +178,13 @@ void instructions(FILE *fi, FILE *fo, ListT *ptr, ListT *road)
         }
         else if(c=='E')
         {
-            truck *p= select(road, stringToInt(id));
+            //truck *p= select(road, stringToInt(id));
 
-            if(p==NULL)
+            if(checkRoad(road, stringToInt(id))==0)
                 fprintf(fo, " %d not on road.\n", stringToInt(id));
             else
             {
+                truck* p=addTruck(stringToInt(id));
                 push(ptr, p);
                 deleteByKey(road, stringToInt(id));
             }
@@ -199,9 +196,14 @@ void instructions(FILE *fi, FILE *fo, ListT *ptr, ListT *road)
         else if(c=='S')
         {
             if(strcmp(id, "R")==0)
-                print(road, fo);
+            {
+                fprintf(fo,"R:");print(road, fo);
+            }
             else if(strcmp(id, "G")==0)
-                print(ptr, fo);
+            {
+                fprintf(fo,"G:");print(ptr, fo);
+            }
+
         }
     }
 }
