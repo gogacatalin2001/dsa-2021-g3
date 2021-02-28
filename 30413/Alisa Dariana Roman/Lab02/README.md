@@ -1,5 +1,5 @@
-# Lab X
+# Lab 2
 
-> Edit this file and describe in a few words what you've done in this lab.
+> i created a git account, learned to use github and i was introduced to singly linked lists
 
 
