@@ -1,5 +1,4 @@
-# Lab X
-
-> Edit this file and describe in a few words what you've done in this lab.
-
-
+# Lab 02
+-installed git
+-git setup (clone repository, name and address)
+-learned git commads
