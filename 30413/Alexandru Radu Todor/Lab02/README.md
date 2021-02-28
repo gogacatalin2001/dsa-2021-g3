@@ -1,5 +1,7 @@
-# Lab X
+# Lab 2
 
-> Edit this file and describe in a few words what you've done in this lab.
+- Learned the basics of GitHub
+- Learned about Singly-Linked List
+- Solved mandatory assignments
 
 
