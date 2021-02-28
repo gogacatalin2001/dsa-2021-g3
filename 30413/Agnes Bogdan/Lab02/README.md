@@ -1,5 +1,6 @@
-# Lab X
+# Lab 02
 
-> Edit this file and describe in a few words what you've done in this lab.
+> it doesn't work correctly, i used a SLL for the road and garage, read the instructions
+from a text file
 
 
