@@ -1,8 +1,7 @@
-R:2 5 10 90 22 
+R:2 5 10 9 22 
 G: none
-R:2 5 10 90 
-G:22 
+R:5 10 9 22 
+G:2 
 Error: 25 not on road!
-Error: 20 not in garage!
-R:2 5 90 10 
-G:22 
+R:5 9 22 10 2 
+G:
