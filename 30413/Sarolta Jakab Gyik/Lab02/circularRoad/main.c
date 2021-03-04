@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 typedef struct node
 {
     int truck_id;
@@ -70,39 +69,48 @@ TrucksT *find(ListT *listPtr, int givenKey)
             p = p->next;
     return NULL;
 }
-int deleteByKey(ListT *listPtr, int givenKey)
+TrucksT *deleteFirst(ListT *listPtr)
+{
+    TrucksT *p;
+    if ( listPtr->first != NULL )
+    {
+        p = listPtr->first;
+        listPtr->first = listPtr->first->next;
+        listPtr->count--;
+        if ( listPtr->first == NULL )
+            listPtr->last = NULL;
+        return p;
+    }
+    return NULL;
+}
+TrucksT *deleteLast(ListT *listPtr)
 {
     TrucksT *q, *q1;
     q1 = NULL;
     q = listPtr->first;
-    while ( q != NULL )
-    {
-        if ( q->truck_id == givenKey ) break;
-        q1 = q;
-        q = q->next;
-    }
     if ( q != NULL )
     {
+        while ( q != listPtr->last )
+        {
+            q1 = q;
+            q = q->next;
+        }
         if ( q == listPtr->first )
         {
-            listPtr->first = listPtr->first->next;
-            free( q );
-            if ( listPtr->first == NULL ) listPtr->last = NULL;
+            listPtr->first = listPtr->last = NULL;
         }
         else
         {
-            q1->next = q->next;
-            if ( q == listPtr->last ) listPtr->last = q1;
-            free( q );
+            q1->next = NULL;
+            listPtr->last = q1;
         }
-        return 1;
     }
-    return 0;
+    return q;
 }
 void writeTrucks(FILE *g, ListT *Road, char x)
 {
     fprintf(g, "%c:", x);
-    if(Road->count == 0 && Road ->first == NULL && Road -> last == NULL)
+    if((Road->count == 0) && (!Road ->first) && (!Road -> last))
         fprintf(g, " none");
     else
     {
@@ -113,7 +121,7 @@ void writeTrucks(FILE *g, ListT *Road, char x)
             r = r -> next;
         }
     }
-     fprintf(g, "\n");
+    fprintf(g, "\n");
 }
 void trucksOut(ListT *Road)
 {
@@ -167,7 +175,12 @@ int main(int argc, char const *argv[])
             p = find(Garage, id);
             if(p == Garage -> last)
             {
-                deleteByKey(Garage, id);
+                TrucksT *q;
+                q = deleteLast(Garage);
+                if(q)
+                {
+                    fprintf(g, "It wasnt deleted\n");
+                }
                 p = createSLLNode(id);
                 int x = insertAtRear(Road, p);
                 if(!x)
@@ -176,35 +189,46 @@ int main(int argc, char const *argv[])
                     break;
                 }
             }
-            else if(p == 0)
+            else
             {
-                fprintf(g, "Error: %d not in garage!\n", id);
+                if(!p)
+                {
+                    fprintf(g, "Error: %d not at exit in the garage!\n", id);
+                }
+                else fprintf(g, "Error: %d not in garage!\n", id);
             }
-            else fprintf(g, "Error: %d not at exit!\n");
         }
         else if(line[0] == 'E')
         {
             TrucksT *p;
             p = find(Road, id);
-            if(p == NULL)
+            if(!p)
                 fprintf(g, "Error: %d not on road!\n", id);
             else
             {
-                int i = deleteByKey(Road, id);
-                createSLLNode(id);
-                int x = insertAtRear(Garage, p);
-                if(!x)
+                if(p != Road->first)
+                    fprintf(g, "Error: %d not at exit on the road!\n", id);
+                else
                 {
-                    fprintf(g, "Error: cannot insert truck in garage\n");
-                    break;
+                    deleteFirst(Road);
+                    createSLLNode(id);
+                    int x = insertAtRear(Garage, p);
+                    if(!x)
+                    {
+                        fprintf(g, "Error: cannot insert truck in garage\n");
+                        break;
+                    }
+                    //writeTrucks(g, Garage, line[2]);
                 }
             }
         }
         else if(line[0] == 'S')
+        {
             if(line[2] == 'R')
                 writeTrucks(g, Road, line[2]);
             else if(line[2] == 'G')
                 writeTrucks(g, Garage, line[2]);
+        }
     }
     fclose(f);
     fclose(g);
@@ -212,3 +236,4 @@ int main(int argc, char const *argv[])
     trucksOut(Garage);
     return 0;
 }
+
