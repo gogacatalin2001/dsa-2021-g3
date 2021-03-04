@@ -17,6 +17,13 @@ Ex2: Lab02 Salau Bogdan Extra
 Deadline until 28.02.2021, 20:00 for making a PR on GitHub with what you've worked.
 Deadline until 4.03.2021, 8:00 for making a PR on GitHub with the extra assignment if you finished the basic mandatory problems.
 
+### Lab03
+
+Only problem 3.2 is mandatory.
+
+Deadline until 7.03.2021, 20:00 for making a PR on GitHub with what you've worked.
+Deadline until 11.03.2021, 8:00 for making a PR on GitHub with the extra assignment if you finished the basic mandatory problems.
+
 ## Grading
 
 There will be 2 laboratory tests, one about Data Structures and one about Algorithms.
