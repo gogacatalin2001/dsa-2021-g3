@@ -50,21 +50,6 @@ NodeT *traverseL(DLListT* listPtr, char *s)//compara sa vada daca exista returne
     }
     return NULL;
 }
-void insertAtFront(DLListT *listPtr, NodeT *p)//insert at front
-{
-    if(listPtr->count==0)
-    {
-        listPtr->first=listPtr->last=p;
-        p->prev=p->next=NULL;
-    }
-    else
-    {
-        p->next=listPtr->first;
-        listPtr->first->prev=p;
-        p->prev=NULL;
-    }
-    listPtr->count++;
-}
 void insertAtRear(DLListT *listPtr, NodeT *p)
 {
     if(listPtr->count==0)
@@ -83,13 +68,11 @@ void insertAtRear(DLListT *listPtr, NodeT *p)
 }
 void traverseA(DLListT *listPtr, NodeT *t)//traverseaza si adauga in ordine
 {
-    NodeT *q,*q1;
+    NodeT *q;
     q=listPtr->first;
-    q1=NULL;
     while(q!=NULL)
     {
         if(stricmp(t->s,q->s)<0) break;
-        q1=q;
         q=q->next;
     }
     if(q!=NULL)
@@ -104,9 +87,9 @@ void traverseA(DLListT *listPtr, NodeT *t)//traverseaza si adauga in ordine
         }
         else
         {
-           q1->next=t;
+           q->prev->next=t;
            t->next=q;
-           t->prev=q1;
+           t->prev=q->prev;
            q->prev=t;
         }
         listPtr->count++;
@@ -154,7 +137,7 @@ int main(int argc, char* argv[])
     {
         if(list->count==0)
         {
-            insertAtFront(list,createNode(s));
+            insertAtRear(list,createNode(s));
             continue;
         }
         t=traverseL(list,s);
