@@ -112,7 +112,7 @@ void add_after_key(ListT *listPtr, char *givenKey, NodeT *p)
     q = listPtr->first;
     while (q!=NULL)
     {
-        if ( strcasecmp(q->key,givenKey)==0) break;
+        if ( strcmp(q->key,givenKey)==0) break;
         q = q->next;
     }
     if ( q != NULL )
@@ -183,6 +183,13 @@ int main(int argc, char **argv)
                     if(strcasecmp(t->key,cuv)<0 && strcasecmp(t->next->key,cuv)>0)
                     {
                         add_after_key(lista,t->key,p);
+                        break;
+                    }
+
+                    else if(strcasecmp(t->key,cuv)==0 && strcmp(t->key,cuv)!=0)
+                    {
+                        add_after_key(lista,t->key,p);
+                        break;
                     }
                 }
             }
