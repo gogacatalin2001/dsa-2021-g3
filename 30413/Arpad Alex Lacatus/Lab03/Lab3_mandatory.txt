@@ -1,0 +1,175 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct node_type
+{
+    char cuv[21];
+    int frq;
+    struct node_type *next;
+    struct node_type *prev;
+    int ok;
+
+} NodeT;
+typedef struct
+{
+    int count;
+    NodeT *first;
+    NodeT *last;
+
+}ListT;
+int cmpx(char * str1, char* str2)
+{
+    char aux1[31],aux2[31];
+    strcpy(aux1,str1);
+    strcpy(aux2,str2);
+    strlwr(aux1);
+    strlwr(aux2);
+    return strcmp(aux1,aux2);
+}
+ListT *createEmptyDLL()
+{
+    ListT*listPtr = (ListT*)malloc(sizeof(ListT));
+        if(listPtr)
+        {
+        listPtr->count = 0;
+        listPtr->first= listPtr->last= NULL;
+        }
+    return listPtr;
+}
+
+NodeT *createDLLNode(char aux[21])
+{
+    NodeT *p = (NodeT*)malloc(sizeof(NodeT));
+    if(p)
+    {
+
+        strcpy(p->cuv,aux);
+        p->next = p->prev = NULL;
+        p->frq=0;
+        p->ok=1;
+
+    }
+    return p;
+}
+
+int insert(ListT *listPtr, NodeT *p)
+{
+    NodeT *q=(NodeT *)malloc(sizeof(NodeT));
+
+    if(listPtr->count==0)
+    {
+        listPtr->first=listPtr->last=p;
+        p->next= NULL;
+        listPtr->count++;
+        return 1;
+
+    }
+    if(cmpx(listPtr->last->cuv,p->cuv)<0)
+    {
+        listPtr->last->next=p;
+        p->prev=listPtr->last;
+        listPtr->last=p;
+        listPtr->count++;
+        return 1;
+
+    }
+    if(cmpx(listPtr->first->cuv,p->cuv)>0)
+    {
+        listPtr->first->prev=p;
+        p->next=listPtr->first;
+        listPtr->first=p;
+        listPtr->count++;
+        return 1;
+    }
+
+    for(q= listPtr->first;q != NULL;q=q->next)
+    {
+        if(cmpx(q->next->cuv,p->cuv)>0)break;
+    }
+
+
+    if(q != NULL)
+    {
+
+        p->next=q->next;
+        q->next->prev=p;
+        q->next=p;
+        p->prev=q;
+    if(q == listPtr->last)
+        {
+        listPtr->last=p;
+        p->next=NULL;
+        }
+    listPtr->count++;
+    return 1;
+    }
+    return 0;
+}
+
+
+
+
+
+
+int main(int argc ,char **argv)
+{
+
+    FILE *f=fopen(argv[1],"r");
+
+    char cuvant[21];
+    ListT *comp=createEmptyDLL();
+
+
+
+    while(fscanf(f,"%s",cuvant)==1)
+    {
+
+        NodeT *p=(NodeT *)malloc(sizeof(NodeT));
+        p= createDLLNode(cuvant);
+        insert(comp,p);
+
+    }
+
+    NodeT *q=(NodeT *)malloc(sizeof(NodeT));
+    NodeT *q1=(NodeT *)malloc(sizeof(NodeT));
+
+
+    for(q= comp->first;q != NULL;q=q->next)
+    {
+        for(q1=comp->first;q1 != NULL;q1=q1->next)
+        {
+            if(strcmp(q->cuv,q1->cuv)==0)q->frq++;
+
+        }
+    }
+    fclose(f);
+    FILE *g=fopen(argv[2], "w");
+
+    for(q= comp->first;q != NULL;q=q->next)
+    {
+        if(q->ok)
+        {
+            fprintf(g,"%s : %d \n",q->cuv,q->frq);
+            for(q1=q->next;q1 != NULL;q1=q1->next)
+            {
+                if(strcmp(q->cuv,q1->cuv)==0)q1->ok=0;
+
+            }
+        }
+    }
+    fprintf(g,"\n");
+    for(q= comp->last;q != NULL;q=q->prev)
+    {
+        if(q->ok)
+        {
+            fprintf(g,"%s : %d \n",q->cuv,q->frq);
+
+        }
+    }
+    fclose(g);
+
+
+
+    return 0;
+}
