@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    char key[50];
+    struct node *next;
+    struct node *prev;
+} NodeT;
+
+typedef struct
+{
+    int count;
+    NodeT *first;
+    NodeT *last;
+} ListT;
+
+ListT *createDLList()
+{
+    ListT *listPtr = (ListT*) malloc(sizeof(ListT));
+    if(listPtr) {
+        listPtr->count = 0;
+        listPtr->first = listPtr->last = NULL;
+    }
+    return listPtr;
+}
+
+int main(int argc, char *argv[])
+{
+    FILE *fileI = fopen(argv[1], "r");
+    FILE *fileO = fopen(argv[2], "w");
+
+    char s[100];
+    while(fscanf(fileI, "%s", s) != EOF) {
+        printf("%s\n", s);
+    }
+    return 0;
+}

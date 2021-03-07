@@ -136,15 +136,21 @@ bool insertAtFront(ListT *listPtr, TruckT *t)
     return 0;
 }
 
-void displayID(ListT *listPtr)
+void displayID(ListT *listPtr, FILE *fileO)
 {
-
+    TruckT *t = listPtr->first;
+    int i;
+    for (i = 0; i < listPtr->count; i++) {
+        fprintf(fileO, "_%d", t->ID);
+        t = t->next;
+    }
+    fprintf(fileO, "\n");
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    FILE *filePtr;
-    filePtr = fopen("input.txt", "r");
+    FILE *filePtr = fopen(argv[1], "r");
+    FILE *fileO = fopen(argv[2], "w");
 
     int i, auxID;
     int numberLines = countLines(filePtr);
@@ -162,10 +168,9 @@ int main()
         /// create truck with ID auxID
         /// add that truck at the rear of roadList
             fscanf(filePtr, "%d", &auxID);
-            printf("%c(%d)\n", c, auxID);
+            //printf("%c(%d)\n", c, auxID);
             if( !insertAtRear(roadList, createSLLTruck(auxID)) )
-                printf("error");
-            else printf("truck with id %d was introduced in R\n", roadList->last->ID);
+                fprintf(fileO, "error");
         }
 
         else if(c == 'E'){
@@ -174,21 +179,17 @@ int main()
             /// if NULL display error:_auxID_not_on_road!
             /// if found add that truck in front of garageList, delete that truck from roadList
             fscanf(filePtr, "%d", &auxID);
-            printf("%c(%d)\n", c, auxID);
-            TruckT *auxT = findTruck(roadList, auxID);
-            if( auxT == NULL ) {
-                printf("error:_%d_not_on_road!\n", auxID);  /// says truck with id 10 not on the road i really
-                                                            /// can't figure out why
+            //printf("%c(%d)\n", c, auxID);
+            if( findTruck(roadList, auxID) == NULL ) {
+                fprintf(fileO, "error:_%d_not_on_road!\n", auxID);
             }
             else {
-                if( !insertAtFront(garageList, auxT) ) {
-                    printf("error");
+                if( !insertAtFront(garageList, createSLLTruck(auxID)) ) { ///corrected
+                    fprintf(fileO, "error");
                 }
-                else printf("truck with id %d entered the garage\n", garageList->first->ID);
                 if( !deleteByID(roadList, auxID) ) {
-                    printf("error");
+                    fprintf(fileO, "error");
                 }
-                else printf("truck with id %d removed from road\n", auxID);
             }
         }
 
@@ -198,47 +199,45 @@ int main()
                 /// if yes, add that truck at rear of roadList, remove truck from the front of garageList
                 /// if not, display error:_auxID_not_at_exit!
             fscanf(filePtr, "%d", &auxID);
-            printf("%c(%d)\n", c, auxID);
+            //printf("%c(%d)\n", c, auxID);
             if( garageList->first->ID == auxID ) {
-                if( !insertAtRear(roadList, garageList -> first) )
-                    printf("error");
+                if( !insertAtRear(roadList, createSLLTruck(auxID)) ) ///corrected
+                    fprintf(fileO, "error");
 
                 if( !deleteByID(garageList, auxID) )
-                    printf("error");
+                    fprintf(fileO, "error");
             }
             else {
-                printf("error:_%d_not_at_exit!\n", auxID);
+                fprintf(fileO, "error:_%d_not_at_exit!\n", auxID);
             }
         }
 
         else if(c == 'S'){  /// show trucks
             char c2 = fgetc(filePtr);
-            printf("%c(%c)\n", c, c2);
+            //printf("%c(%c)\n", c, c2);
             if(c2 == 'R') {
-                printf("R:");
+                fprintf(fileO, "R:");
                 if(roadList -> count == 0)
-                    printf("none\n");
+                    fprintf(fileO, "none\n");
                 else {
-                    displayID(roadList);
-                    printf("\n");
+                    displayID(roadList, fileO);
                 }
             }
             else if(c2 == 'G') {
-                printf("G:");
+                fprintf(fileO, "G:");
                 if(garageList -> count == 0)
-                    printf("none\n");
+                    fprintf(fileO, "none\n");
                 else {
-                    displayID(garageList);
-                    printf("\n");
+                    displayID(garageList, fileO);
                 }
             }
             else {
-                printf("error! impossible command");
+                fprintf(fileO, "error! impossible command");
             }
         }
 
         else {
-            printf("error! impossible command");
+            fprintf(fileO, "error! impossible command");
             exit(1);
         }
 
