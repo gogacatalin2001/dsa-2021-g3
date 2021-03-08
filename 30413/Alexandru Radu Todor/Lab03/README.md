@@ -1,5 +1,7 @@
-# Lab X
+# Lab 3
 
-> Edit this file and describe in a few words what you've done in this lab.
+- Learned how to use Circular Singly-Linked Lists
+- Learned how to use Double-Linked Lists
+- Solved mandatory assignment (the solution contains comments inside to be easy to understand)
 
 
