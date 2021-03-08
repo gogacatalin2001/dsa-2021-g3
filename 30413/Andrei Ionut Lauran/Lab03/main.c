@@ -113,12 +113,12 @@ void sort(ListT *listPtr)
     x:   p2=p1->next;
     while(p2->next!=NULL)
     {
-        if(strcmp(p1->word,p2->word)<0)
+        if(stricmp(p1->word,p2->word)<0)
             swap(p1,p2);
         p2=p2->next;
     }
     p1=p1->next;
-    if(p1->next!=NULL)
+    if(p1->next->next!=NULL)
         goto x;
 }
 
@@ -166,3 +166,11 @@ int main(int *argc, char *argv[])
     purge(listPtr);
     return 0;
 }
+//Process finished with exit code -1073741819 (0xC0000005)
+//I have searched this code on the internet and there it says that
+//it may be a pointer that has been overwritten or that i have been
+//adressing something outside of allowed boundaries
+//"In that case you point to a piece of memory that has not been allocated
+// to your process and thus does and should generate access violation."
+// still, i couldn't identify the problem. My guess is that the problem is
+//at the function "swap" or "sort"
