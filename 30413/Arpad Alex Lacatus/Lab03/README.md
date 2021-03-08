@@ -1,5 +1,5 @@
-# Lab X
+# Lab 03
 
-> Edit this file and describe in a few words what you've done in this lab.
+> Today we learned about doubly-linked lists and we made recap about singly-linked ones.
 
 
