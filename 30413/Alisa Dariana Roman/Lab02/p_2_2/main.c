@@ -131,21 +131,21 @@ NodeT *find(ListT *listPtr, int givenKey)
     return NULL; /* not found */
 }
 
-void displayID(ListT *listPtr)
+void displayID(ListT *listPtr, FILE *fileO)
 {
     NodeT *t = listPtr->first;
     int i;
     for (i = 0; i < listPtr->count; i++) {
-        printf("_%d", t->key);
+        fprintf(fileO, "_%d", t->key);
         t = t->next;
     }
-    printf("\n");
+    fprintf(fileO, "\n");
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    FILE *filePtr;
-    filePtr = fopen("input.txt", "r");
+    FILE *filePtr = fopen(argv[1], "r");
+    FILE *fileO = fopen(argv[2], "w");
 
     int i, auxID;
     int numberLines = countLines(filePtr);
@@ -163,9 +163,9 @@ int main()
         /// create truck with ID auxID
         /// add that truck at the rear of roadList
             fscanf(filePtr, "%d", &auxID);
-            printf("%c(%d)\n", c, auxID);
+            //printf("%c(%d)\n", c, auxID);
             if( !insertAtRear(roadList, createSLLNode(auxID)) )
-                printf("error\n");
+                fprintf(fileO, "error\n");
         }
 
         else if(c == 'E'){
@@ -174,17 +174,17 @@ int main()
             /// if not display error:_auxID_not_first_on_road!
             /// if yes add that truck in front of garageList, delete that truck from roadList
             fscanf(filePtr, "%d", &auxID);
-            printf("%c(%d)\n", c, auxID);
+            //printf("%c(%d)\n", c, auxID);
             if(roadList->first->key == auxID) {
                 NodeT * auxT = deleteFirst(roadList);
                 if( !insertAtFront(garageList, auxT ))
-                    printf("error\n");
+                    fprintf(fileO, "error\n");
             }
             else {
                 if(find(roadList, auxID) == NULL)
-                    printf("error:_%d_not_on_road!\n", auxID);
+                    fprintf(fileO, "error:_%d_not_on_road!\n", auxID);
                 else
-                    printf("error:_%d_not_first_on_road!\n", auxID);
+                    fprintf(fileO, "error:_%d_not_first_on_road!\n", auxID);
             }
         }
 
@@ -194,44 +194,44 @@ int main()
                 /// if yes, add that truck at rear of roadList, remove truck from the front of garageList
                 /// if not, display error:_auxID_not_at_exit!
             fscanf(filePtr, "%d", &auxID);
-            printf("%c(%d)\n", c, auxID);
+            //printf("%c(%d)\n", c, auxID);
             if(garageList->first->key == auxID) {
                     NodeT *auxT2 = deleteFirst(garageList);
                 if( !insertAtRear(roadList, auxT2) ) {
-                    printf("error\n");
+                    fprintf(fileO, "error\n");
                 }
             }
             else {
-                printf("error:_%d_not_at_exit\n", auxID);
+                fprintf(fileO, "error:_%d_not_at_exit\n", auxID);
             }
         }
 
         else if(c == 'S'){  /// show trucks
             char c2 = fgetc(filePtr);
-            printf("%c(%c)\n", c, c2);
+            //printf("%c(%c)\n", c, c2);
             if(c2 == 'R') {
-                printf("R:");
+                fprintf(fileO, "R:");
                 if(roadList -> count == 0)
-                    printf("none\n");
+                    fprintf(fileO, "none\n");
                 else {
-                    displayID(roadList);
+                    displayID(roadList, fileO);
                 }
             }
             else if(c2 == 'G') {
-                printf("G:");
+                fprintf(fileO, "G:");
                 if(garageList -> count == 0)
-                    printf("none\n");
+                    fprintf(fileO, "none\n");
                 else {
-                    displayID(garageList);
+                    displayID(garageList, fileO);
                 }
             }
             else {
-                printf("error! impossible command");
+                fprintf(fileO, "error! impossible command");
             }
         }
 
         else {
-            printf("error! impossible command");
+            fprintf(fileO, "error! impossible command");
             exit(1);
         }
 
