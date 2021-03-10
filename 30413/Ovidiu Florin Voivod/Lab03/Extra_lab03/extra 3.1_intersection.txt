@@ -1,0 +1,21 @@
+/**--------------------------------------------------------------------**/
+/** Function to find the intersection node in 2 different lists        **/
+/**--------------------------------------------------------------------**/
+NodeT *intersection(ListT *listPtr1,ListT *listPtr2)
+{
+    NodeT *p,*t;
+    p=listPtr1->first;
+    t=listPtr2->first;
+    for(p=listPtr1->first; p!=NULL; p=p->next)
+        for(t=listPtr2->first;t!=NULL;t=t->next)
+    {
+        if(p->key==t->key)
+        {
+            return p;
+            //break;
+
+        }
+    }
+    return NULL;
+
+}
