@@ -18,4 +18,17 @@
 > with lower- or uppercase letters. It was important to know at the end (when displaying the list) if a word was actually starting with 
 > lower- or uppercase letters and changing back to normal a word if needed.
 
+# Extra
 
+*intersection*
+> In this problem my first idea was to take to pointers and go through the list with 2 loops, comparing the element. This seemed simple,
+> so I tried to search for a more efficient algorithm. After I took some examples on paper, I realised that it's enough to compare the 
+> elements in such a way that we only start from the shorter list and from the same level from the end at the longer list. For this, I
+> calculated the difference between the no. of elements in each list (the head type containing this). By this way, I could go through the
+> lists with a single for loop, comparing the elemnts on the same "level".
+*duplicates*
+> Here I couldn't think about any better algorithm without making it too complicated, but I'm sure it has to exist one.
+> I transversed the list using 2 while loops, comparing an element with the ones after it. If I met duplicates, I made the new linkage 
+> and delete the duplicate.
+
+> In both problems I made some lists to test my functions.
