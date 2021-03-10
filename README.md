@@ -4,7 +4,7 @@ Data Structures and Algorithms lab repository
 
 ## Lab Structure
 
-### Lab02
+### Lab02 SLL
 
 ⚠️⚠️⚠️ IMPORTANT ⚠️⚠️⚠️
 
@@ -17,12 +17,17 @@ Ex2: Lab02 Salau Bogdan Extra
 Deadline until 28.02.2021, 20:00 for making a PR on GitHub with what you've worked.
 Deadline until 4.03.2021, 8:00 for making a PR on GitHub with the extra assignment if you finished the basic mandatory problems.
 
-### Lab03
+### Lab03 DLL
 
 Only problem 3.2 is mandatory.
 
 Deadline until 7.03.2021, 20:00 for making a PR on GitHub with what you've worked.
 Deadline until 11.03.2021, 8:00 for making a PR on GitHub with the extra assignment if you finished the basic mandatory problems.
+
+### Lab04 Binary Trees
+
+Solve problem 4.2.
+Deadline until 17.03.2021, 20:00 for making a PR on GitHub with the mandatory problems and extra assignment if you finished the mandatory problems.
 
 ## Grading
 

@@ -1,0 +1,232 @@
+//----- Listing.4.1 --- Code part 01 ----------------------
+// Example binary tree node structure}
+typedef struct node_type
+{
+  char id; /* node name */
+  label ; /* appropriate type for label */
+  struct node_type *left, *right;
+} NodeT;
+//----- Listing.4.2 --- Code part 02 ----------------------
+// Creating a binary tree like the one in \autoref{fig:BinTree}}
+NodeT *createBinTree()
+{
+  NodeT *p;
+  char c;
+  /* read node id */
+  scanf("%c", &c);
+  if ( c == '*' )
+    return NULL; /* empty tree; do nothing */
+  else /* else included for clarity */
+  { /* build node pointed to by p */
+    p = ( NodeT *) malloc( sizeof( NodeT ));
+    if ( p == NULL )
+      fatalError( "Out of space in createBinTree" );
+    /* fill in node */
+    p->id = c;
+    p->left = createBinTree();
+    p->right = createBinTree();
+  }
+  return p;
+}
+//----- Listing.4.3 --- Code part 03 ----------------------
+// Construction and traversals of binary trees}
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node_type
+{
+  char id; /* node name */
+  /* ... other useful info */
+  struct node_type *left, *right;
+} NodeT;
+void fatalError( const char *msg )
+{
+ printf( msg );
+ printf( "\n" );
+ exit ( 1 );
+}
+void preorder( NodeT *p, int level )
+{
+  if ( p != NULL )
+  {
+    for ( int i = 0; i <= level; i++ ) printf( " " ); /* for nice listing */
+    printf( "%2.2d\n", p->id );
+    preorder( p->left, level + 1 );
+    preorder( p->right, level + 1 );
+  }
+}
+void inorder( NodeT *p, int level )
+{
+  if ( p != NULL )
+  {
+    inorder( p->left, level + 1 );
+    for ( int i = 0; i <= level; i++ ) printf( " " ); /* for nice listing */
+    printf( "%2.2d\n", p->id );
+    inorder( p->right, level + 1 );
+  }
+}
+//-----  --- Code part 04 ----------------------
+// Construction and traversals of binary trees (continued)}
+void postorder( NodeT *p, int level )
+{
+  if ( p != NULL )
+  {
+    postorder( p->left, level + 1 );
+    postorder( p->right, level + 1 );
+    for ( int i = 0; i <= level; i++ ) printf( " " ); /* for nice listing */
+    printf( "%2.2d\n", p->id );
+  }
+}
+NodeT *createBinTree( int branch, NodeT *parent )
+{
+  NodeT *p;
+  int id;
+
+  /* read node id */
+  if ( branch == 0 )
+     printf( "Root identifier [0 to end] =" );
+  else
+  if ( branch == 1 )
+     printf( "Left child of %d [0 to end] =",
+              parent->id );
+  else
+     printf( "Right child of %d [0 to end] =",
+              parent->id );
+  scanf("%d", &id);
+  if ( id == 0 )
+    return NULL;
+  else
+  { /* build node pointed to by p */
+    p = ( NodeT *)malloc(sizeof( NodeT ));
+    if ( p == NULL )
+      fatalError( "Out of space in createBinTree" );
+    /* fill in node */
+    p->id = id;
+    p->left = createBinTree( 1, p );
+    p->right = createBinTree( 2, p );
+  }
+  return p;
+}
+int main()
+{
+  NodeT *root;
+
+  root = createBinTree( 0, NULL );
+  while ('\n' != getc(stdin));
+  printf( "\nPreorder listing\n" );
+  preorder( root, 0 );
+  printf( "Press Enter to continue." );
+  while ('\n' != getc(stdin));
+  printf( "\nInorder listing\n" );
+  inorder( root, 0 );
+  printf( "Press Enter to continue." );
+  while ('\n' != getc(stdin));
+  printf( "\nPostorder listing\n" );
+  postorder( root, 0 );
+  printf( "Press Enter to continue." );
+  while ('\n' != getc(stdin));
+  return 0;
+}
+//----- Listing.4.5 --- Code part 05 ----------------------
+// Construction and traversals of completely balanced binary trees}
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node_type
+{
+  char id; /* node name */
+  ... /* other useful info */
+  struct node_type *left, *right;
+} NodeT;
+void fatalError( const char *msg )
+{
+ printf( msg );
+ printf( "\n" );
+ exit ( 1 );
+}
+void preorder( NodeT *p, int level )
+{
+  if ( p != NULL )
+  {
+    for (int i = 0; i <= level; i++ )
+      printf( " " ); /* for nice listing */
+    printf( "%2.2d\n", p->id );
+    preorder( p->left, level + 1 );
+    preorder( p->right, level + 1 );
+  }
+}
+void inorder( NodeT *p, int level )
+{
+  if ( p != NULL )
+  {
+    inorder( p->left, level + 1 );
+    for (int i = 0; i <= level; i++ )
+      printf( " " ); /* for nice listing */
+    printf( "%2.2d\n", p->id );
+    inorder( p->right, level + 1 );
+  }
+}
+void postorder( NodeT *p, int level )
+{
+  if ( p != NULL )
+  {
+    postorder( p->left, level + 1 );
+    postorder( p->right, level + 1 );
+    for ( int i = 0; i <= level; i++ )
+      printf( " " ); /* for nice listing */
+    printf( "%2.2d\n", p->id );
+  }
+}
+NodeT *createBalBinTree( int nbOfNodes )
+{
+    NodeT *p;
+    if ( nbOfNodes == 0 ) return NULL;
+
+    int nLeft = nbOfNodes / 2;
+    int nRight = nbOfNodes - nLeft - 1;
+    p = ( NodeT * ) malloc( sizeof( NodeT ));
+    if (p)
+    {
+        printf( "Node identifier in preorder=" );
+        scanf( "%d", &p->id );
+        p->left = createBalBinTree( nLeft );
+        p->right = createBalBinTree( nRight );
+    }
+    else abort(); // no memory left
+    return p;
+}
+//-----  --- Code part 06 ----------------------
+// Construction and traversals of balanced binary trees (continued)}
+int main()
+{
+  NodeT *root;
+  int nbOfNodes = 0;
+
+  printf("\nNumber of nodes in the tree=");
+  scanf("%d", &nbOfNodes );
+  creBalBinTree( nbOfNodes );
+  while ('\n' != getc(stdin));
+  printf( "\nPreorder listing\n" );
+  preorder( root, 0 );
+  printf( "Press Enter to continue." );
+  while ('\n' != getc(stdin));
+  printf( "\nInorder listing\n" );
+  inorder( root, 0 );
+  printf( "Press Enter to continue." );
+  while ('\n' != getc(stdin));
+  printf( "\nPostorder listing\n" );
+  postorder( root, 0 );
+  printf( "Press Enter to continue." );
+  while ('\n' != getc(stdin));
+  return 0;
+}
+//----- Listing.4.7 --- Code part 07 ----------------------
+// Example of arbitrary tree node record}
+/* maximum number of children */
+#define MAX_CHILD <appropriate value>
+typedef struct node_type
+{
+  char id; /* node name */
+  ... /* other useful info */
+  struct node_type *children[MAX_CHILD];
+} NodeT;
