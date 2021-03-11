@@ -363,3 +363,4 @@ int main(int argc, char **argv)//*argv==*argv
    fclose(output);
     return 0;
 }
+//git is not working
