@@ -86,7 +86,7 @@ NodeT *find(NodeT *p, char c)
 void interchange (NodeT *root, char c)
 {
     NodeT *given = find(root,c);
-    if (given->left != NULL && given->right != NULL)
+    if (given->left != NULL || given->right != NULL)
     {
         NodeT *aux = NULL;
         aux = given->left;
@@ -115,8 +115,8 @@ int nrLeaves (NodeT *root)
 }
 int main(int argc, char *argv[])
 {
-    FILE *in = openCheck(argv[1], "r");
-    FILE *out = openCheck(argv[2], "w");
+    FILE *in = openCheck("in.txt", "r");
+    FILE *out = openCheck("out.txt", "w");
     NodeT *root = createBinTree(in);
     int height = heightTree(root);
     fprintf(out,"height of tree: %d\n", height);
