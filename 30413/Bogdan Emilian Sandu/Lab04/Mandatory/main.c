@@ -60,6 +60,8 @@ void interChange(NodeT *p)
     aux=p->left;
     p->left=p->right;
     p->right=aux;
+    interChange(p->left);
+    interChange(p->right);
 }
 int heightTree(NodeT *root)
 {
