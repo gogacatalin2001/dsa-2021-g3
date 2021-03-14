@@ -1,5 +1,5 @@
-# Lab X
+# Lab 4 Cimpan Stefan
 
-> Edit this file and describe in a few words what you've done in this lab.
+> editing this soon, once i figure out a bug.
 
 
