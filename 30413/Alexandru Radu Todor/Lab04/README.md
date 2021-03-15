@@ -1,5 +1,7 @@
-# Lab X
+# Lab 4
 
-> Edit this file and describe in a few words what you've done in this lab.
+- Learned about Binary Trees and a bit about Balanced Trees and Arbitrary Trees
+- Learned about Time Complexity
+- Solved Mandatory Problem
 
 
