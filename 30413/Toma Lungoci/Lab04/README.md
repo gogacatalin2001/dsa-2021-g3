@@ -1,6 +1,6 @@
 # Lab 04
 
-> discussed the proper algorithms for lab3 extra problems. Talked about trees, traversals, nr of leaves, etc.
+> discussed the proper algorithms for lab3 extra problems, and the bigO (the elemntary complexities). Talked about trees, traversals, nr of leaves, etc.
 
 ->Mandatory: for  interchanging left and right subtrees i implemented a "find" function which returns the node with the asked 
 key, which i used in the "interchange" func. In this function, i just copied the ->left in a Aux and swapped them.
