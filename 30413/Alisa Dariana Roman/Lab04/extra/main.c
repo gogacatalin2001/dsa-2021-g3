@@ -39,7 +39,7 @@ double computeSum (NodeT *p)   /// this function computes sum of tenures of the 
     return p->sum;
 }
 
-int countEmployees(NodeT *p, double *max)    /// puts in <node>->employees number of employees working below the node + 1
+int countEmployees(NodeT *p, double *max)    /// number of employees working below the node + 1
 {
     int employees;
     if (p->left == NULL && p->right == NULL) {
@@ -49,7 +49,7 @@ int countEmployees(NodeT *p, double *max)    /// puts in <node>->employees numbe
     employees = 1 + countEmployees(p->left, max) + countEmployees(p->right, max);
     p->sum = p->sum / employees;         /// now in sum we have the average tenure we are looking for
     if (p->sum > *max) {
-        *max = p->sum;              /// in the address pointed to by pointer max will be saved the maximmum
+        *max = p->sum;              /// in the address pointed to by pointer max will be saved the maximum
     }                               /// average tenure
     return employees;
 }
