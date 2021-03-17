@@ -8,5 +8,6 @@ Solved the extra assignment:
 *developed a function called highestTenureM which goes from node to node and calculates the sum and nr of nodes of the subtree (it excludes leaves) using highestTenure
 *developed a function called highestTenureFinal which condenses all the prev functions into 1 and makes use of a global variable to find the manager
 Tried to make it work in n time but didnt manage.
+Solved an optional problem, the one about expression trees.
 
 
