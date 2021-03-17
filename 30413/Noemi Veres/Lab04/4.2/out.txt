@@ -1,0 +1,6 @@
+height of tree: 4
+number of leaves: 3
+interchanged node: C
+PRE: A B D G C F H E 
+IN: D G B A F H C E 
+POST: G D B H F E C A 

@@ -1,5 +1,6 @@
-# Lab X
+# Lab 03 Goga Catalin
 
-> Edit this file and describe in a few words what you've done in this lab.
+> I learned how to use the doubly linked list. I found out about array implementation of circular lists.
+>Uploaded the second mandatory problem. I don't understand why there is nothing in the output folder.
 
 

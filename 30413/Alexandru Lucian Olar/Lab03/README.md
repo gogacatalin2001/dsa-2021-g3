@@ -1,5 +1,5 @@
-# Lab X
+# Lab 3
 
-> Edit this file and describe in a few words what you've done in this lab.
+In this lab i learned to work with doubly linked lists. The whole list thing seems clearer to me now. It gets better in my opinion
 
 

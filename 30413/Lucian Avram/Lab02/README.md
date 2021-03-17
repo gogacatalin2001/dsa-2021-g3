@@ -1,5 +1,5 @@
 # Lab X
 
-> Edit this file and describe in a few words what you've done in this lab.
+> In this lab I've learned how to use git.
 
 

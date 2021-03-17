@@ -1,5 +1,6 @@
-# Lab X
+# Lab 04
 
-> Edit this file and describe in a few words what you've done in this lab.
+> Learned about trees, binary trees, tree traversals, time complexity of an algorithm.
+Managed to solve the mandatory assignment.
 
 

@@ -1,0 +1,8 @@
+R: 2 5 10 9 22
+G: none
+R: 5 10 9 22
+G: 2
+error: 25 not on road!
+error: 2 not at exit!
+R: 5 9 22 10
+G: 2

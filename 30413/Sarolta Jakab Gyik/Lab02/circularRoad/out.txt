@@ -1,0 +1,11 @@
+R:2 5 10 9 22 
+G: none
+2:2 5 10 9 22 
+R:5 10 9 22 
+G:2 5 10 9 22 
+Error: 10 not at exit on the road!
+Error: 25 not on road!
+Error: 10 not in garage!
+It wasnt deleted
+R:5 10 9 22 2 
+G:

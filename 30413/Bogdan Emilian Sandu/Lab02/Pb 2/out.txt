@@ -1,0 +1,9 @@
+ 22 9 10 5 2
+ none
+ 22 9 10 5
+ 2
+ error 10 not at front of queue or not on road
+ error 25 not at front of queue or not on road
+ 10 not at entrance of garage or not in garage
+ 2 22 9 10 5
+ none

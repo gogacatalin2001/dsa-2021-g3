@@ -1,0 +1,50 @@
+/**--------------------------------------------------------------------**/
+/** Function to find the intersection node in 2 different lists        **/
+/** List will be sorted in ascending order-> no restrictions about this**/
+/**--------------------------------------------------------------------**/
+void RemoveDuplicates(ListT *listPtr)
+{
+    NodeT *p,*t,*q,*p1;
+    int aux,givenKey;
+    for(t=listPtr->first; t!=listPtr->last; t=t->next) //sort the keys of the list in ascending order
+        for(p=t->next; p!=NULL; p=p->next)
+        {
+            if(t->key>p->key)
+            {
+                aux=t->key;
+                t->key=p->key;
+                p->key=aux;
+            }
+        }
+    p=listPtr->first;
+    p1=p->next;
+
+    {
+        while(p1!=NULL)
+        {
+            //p1=p;
+           // p=p1->next;
+            if(p->key==p1->key)     //search for duplicates
+            {
+
+                p->next = p1->next;
+                if ( p1 == listPtr->last ) listPtr->last = p;
+                //free( p ); /* release memory */
+                 //p1=p1->next;
+
+            }
+            if(p->key!=p1->key)
+            {
+                p=p->next;
+                p1=p1->next;
+            }
+            else
+            {
+                p1=p1->next;
+            }
+
+        }
+    }
+
+
+}

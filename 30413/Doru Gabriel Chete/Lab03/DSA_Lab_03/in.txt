@@ -1,0 +1,1 @@
+Everything LaTeX numbers for you has a counter associated with it. The name of the counter is the same as the name of the environment or command that produces the number, except with \. Below is a list of some of the counters udes in LaTeXs standard documents styles to control numbering.
