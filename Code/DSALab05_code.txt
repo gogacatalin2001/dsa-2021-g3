@@ -1,0 +1,513 @@
+//----- Listing.5.1 --- Code part 01 ----------------------
+// Example binary tree node structure}
+typedef struct node_type
+{
+  KeyType key;
+  ElementType info;
+  struct node_type *left, *right;
+} BSTNodeT;
+//----- Listing.5.2 --- Code part 02 ----------------------
+// A non-recursive BST insertion procedure}
+typedef int KeyType;
+typedef int ElementType;
+/* for simplicity. Both should occur before BSTNodeT declaration */
+BSTNodeT *createNode(KeyType givenKey)
+{
+    /* build node */
+    BSTNodeT *p = (BSTNodeT *) malloc (sizeof (BSTNodeT));
+    if (p)
+    {
+        p->key = givenKey;
+        /* the info field should be filled in here */
+        p->left = p-> right = NULL; /* leaf node */
+    }
+    return p;
+}
+void nInsert(BSTNodeT **root, KeyType givenKey)
+{
+    BSTNodeT *p = createNode(givenKey);
+    if (!p)
+    {
+        // add suitable error message and give up
+        abort();
+    }
+    if (*root == NULL)
+    {
+        /* empty tree */
+        *root = p;
+        return;
+    }
+    /* if we reach here then the tree is not empty;
+       look for parent node of node pointed to by p */
+    BSTNodeT *q = *root;
+    for (; ;)
+    {
+        if (givenKey < q->key)
+        {
+            /* follow on left subtree */
+            if (q-> left == NULL)
+            {
+                /* insert node here */
+                q->left = p;
+                return;
+            }
+            /* else */
+            q = q->left;
+        }
+        else if (givenKey > q->key)
+        {
+            /* follow on right subtree */
+            if (q-> right == NULL)
+            {
+                /* insert node here */
+                q->right = p;
+                return;
+            }
+            /* else */
+            q = q->right;
+        }
+        else
+        {
+            /* key already present; could write a message... */
+            free(p);
+        }
+    }
+}
+//----- Listing.5.3 --- Code part 03 ----------------------
+// A recursive BST insertion procedure}
+// uses the createNode function shown before
+BSTNodeT *insertNode(BSTNodeT *root, int key)
+{
+    /* If the tree is empty, then a single node tree is created */
+    if (root == NULL)
+        root = createNode(key);
+    else
+    {
+        if (key < root->key)
+            root->left = insertNode(root->left, key);
+        else if (key > root->key)
+            root->right = insertNode(root ->right, key);
+        else
+            printf("\nNode with key = %d already exists\n", key);
+    }
+    return root;
+}
+//----- Listing.5.4 --- Code part 04 ----------------------
+// Finding a node with a given key in a BST}
+BStNodeT *find(BSTNodeT *root, KeyType givenKey)
+{
+  if (root == NULL) return NULL; /* empty tree */
+  for (BSTNodeT *p = root; p != NULL;)
+  {
+    if (givenKey == p->key) return p;
+    else
+    if (givenKey < p->key) p = p->left;
+    else                   p = p->right;
+  }
+  return NULL; /* not found */
+}
+//----- Listing.5.5 --- Code part 05 ----------------------
+// Finding a node of minimum/maximum key value in a BST}
+BSTNodeT *findMin(BSTNodeT *node)
+{
+    if(node == NULL)
+    {   /* There is no element in the tree */
+        return NULL;
+    }
+    if(node->left) /* Go to the left sub tree to find the min element */
+        return findMin(node->left);
+    else
+        return node;
+}
+BSTNodeT *findMax(BSTNodeT *node)
+{
+    if(node == NULL)
+    {   /* There is no element in the tree */
+        return NULL;
+    }
+    if(node->right) /* Go to the left sub tree to find the min element */
+        return findMax(node->right);
+    else
+        return node;
+}
+//----- Listing.5.6 --- Code part 06 ----------------------
+// Deleting a node with a given key in a BST}
+BSTNodeT* delNode(BSTNodeT* node, int key)
+{
+    if(node == NULL)
+    {
+        printf("Element Not Found");
+    }
+    else if(key < node->key)
+    {
+        // must be in left subtree
+        node->left = delNode(node->left, key);
+    }
+    else if(key > node->key)
+    {
+        // must be in right subtree
+        node->right = delNode(node->right, key);
+    }
+    else
+    {
+        // found node
+        /* Now We can delete this node and replace with either minimum element
+           in the right sub tree or maximum element in the left subtree */
+        if(node->right && node->left)
+        {
+            /* Here we will replace with minimum element in the right sub tree */
+            BSTNodeT *temp = findMin(node->right);
+            node -> key = temp->key;
+            /* As we replaced it with some other node, we have to delete that node */
+            node -> right = delNode(node->right, temp->key);
+        }
+        else
+        {
+            /* If there is only one or zero children then we can directly
+               remove it from the tree and connect its parent to its child */
+            BSTNodeT *temp = node;
+            if(node->left == NULL)
+                node = node->right;
+            else if(node->right == NULL)
+                node = node->left;
+            free(temp); /* temp is longer required */
+        }
+    }
+    return node;
+}
+//----- Listing.5.7 --- Code part 07 ----------------------
+// Deleting a BST}
+void delTree(BSTNodeT *root)
+{
+  if (root != NULL)
+  {
+    delTree(root ->left);
+    delTree(root ->right);
+    free(root);
+  }
+}
+//----- Listing.5.8 --- Code part 08 ----------------------
+// Traversals of a BST}
+void preorder(BSTNodeT *p)
+{
+  if (p != NULL)
+  {
+    /* include code for info retrieval here */
+    preorder(p->left);
+    preorder(p->right);
+  }
+}
+void inorder(BSTNOdeT *p)
+{
+  if (p != NULL)
+  {
+    inorder(p->left);
+    /* include code for info retrieval here */
+    inorder(p->right);
+  }
+}
+void postorder(BSTNOdeT *p)
+{
+  if (p != NULL)
+  {
+    postorder(p->left);
+    postorder(p->right);
+    /* include code for info retrieval here */
+  }
+}
+//----- Listing.5.9 --- Code part 09 ----------------------
+// Binary search trees code sample.}
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define LEFT 1
+#define RIGHT 2
+
+typedef struct bst_node
+{
+  int key;
+  struct bst_node *left, *right;
+} BSTNodeT;
+
+BSTNodeT *root;
+
+void fatalError(const char *msg)
+{
+ printf(msg);
+ printf("\n");
+ exit (1);
+}
+
+/* Tree traversal functions
+ * p = current node;
+ * level = used for nice printing
+*/
+void preorder(BSTNodeT *p, int level)
+{
+  int i;
+
+  if (p != NULL)
+  {
+    for (i = 0; i <= level; i++) printf(" "); /* for nice listing */
+    printf("%2.2d\n", p->key);
+    preorder(p->left, level + 1);
+    preorder(p->right, level + 1);
+  }
+}
+void inorder(BSTNodeT *p, int level)
+{
+  int i;
+
+  if (p != NULL)
+  {
+    inorder(p->left, level + 1);
+    for (i = 0; i <= level; i++) printf(" "); /* for nice listing */
+    printf("%2.2d\n", p->key);
+    inorder(p->right, level + 1);
+  }
+}
+void postorder(BSTNodeT *p, int level)
+{
+  int i;
+
+  if (p != NULL)
+  {
+    postorder(p->left, level + 1);
+    postorder(p->right, level + 1);
+    for (i = 0; i <= level; i++) printf(" "); /* for nice listing */
+    printf("%2.2d\n", p->key);
+  }
+}
+/* non recursive version of insert */
+void insert(int key)
+{
+  BSTNodeT *p, *q;
+
+  p = (BSTNodeT *) malloc(sizeof(BSTNodeT));
+  p->key = key;
+  p->left = p->right = NULL;
+  if (root == NULL)
+  {
+    root = p;
+    return;
+  }
+  q = root;
+  for (; ;)
+  {
+    if (key < q->key)
+    {
+      if (q->left == NULL)
+      {
+        q->left = p;
+        return;
+      }
+      else
+        q = q->left;
+    }
+    else
+    if (key > q->key)
+    {
+      if (q->right == NULL)
+      {
+        q->right = p;
+        return;
+      }
+      else
+	    q = q->right;
+    }
+    else
+    { /* keys are equal */
+      printf("\nNode of key=%d already exists\n",  key);
+      free(p);
+      return;
+    }
+  }
+}
+BSTNodeT *recInsert(BSTNodeT *root, int key)
+{
+  BSTNodeT *p;
+
+  if (root == NULL)
+  {
+    p = (BSTNodeT *) malloc(sizeof(BSTNodeT));
+    p->key = key;
+    p->left = p->right = NULL;
+    root = p;
+    return root;
+  }
+  else
+  {
+    if (key < root->key)
+      root->left = recInsert(root ->left, key);
+    else
+    if (key > root->key)
+      root->right = recInsert(root ->right, key);
+    else /* key already there */
+      printf("\nNode of key=%d already exists\n",
+              key);
+  }
+  return root;
+}
+BSTNodeT *find(BSTNodeT *root, int key)
+{
+  BSTNodeT *p;
+
+  if (root == NULL) return NULL;
+  p = root;
+  while (p != NULL)
+  {
+    if (p -> key == key)
+      return p; /* found */
+    else
+    if (key < p->key)
+	  p = p->left;
+    else
+	  p = p->right;
+  }
+  return NULL; /* not found */
+}
+BSTNodeT *delNode(BSTNodeT *root, int key)
+{
+  BSTNodeT *p; /* points to node to delete */
+  BSTNodeT *pParent; /* points to parent of p */
+  BSTNodeT *pRepl; /* points to node that will replace p */
+  BSTNodeT *pReplParent; /* points to parent of node that will replace p */
+  int direction; /* LEFT, RIGHT */
+  if (root == NULL) return NULL; /* empty tree */
+  p = root;
+  pParent = NULL;
+  while (p != NULL && p->key != key)
+  {
+    if (key < p->key)
+    { /* search left branch */
+      pParent = p;
+      p = p->left;
+      direction = LEFT;
+    }
+    else
+    { /* search right branch */
+      pParent = p;
+      p = p->right;
+      direction = RIGHT;
+    }
+  }
+  if (p == NULL)
+  {
+    printf("\nNo node of key value=%d\n", key);
+    return root;
+  }
+  /* node of key p found */
+  if (p->left == NULL)
+    pRepl = p->right; /* no left child */
+  else
+  if (p->right == NULL)
+    pRepl = p->left; /* no right child */
+  else
+  { /* both children present */
+    pReplParent = p;
+    pRepl = p->right; /* search right subtree */
+    while (pRepl->left != NULL)
+    {
+      pReplParent = pRepl;
+      pRepl = pRepl->left;
+    }
+    if (pReplParent != p)
+    {
+      pReplParent->left = pRepl->right;
+      pRepl->right = p->right;
+    }
+    pRepl->left = p->left;
+  }
+  free(p);
+  printf("\nDeletion of node %d completed\n", key);
+  if (pParent == NULL)
+    return pRepl; /* original root was deleted */
+  else
+  {
+    if (direction == LEFT)
+      pParent->left = pRepl;
+    else
+      pParent->right = pRepl;
+    return root;
+  }
+}
+void delTree(BSTNodeT *root)
+{
+  if (root != NULL)
+  {
+    delTree(root->left);
+    delTree(root->right);
+    free(root);
+  }
+}
+int getInt(const char *message)
+{
+    int val;
+    printf(message);
+    scanf("%d", &val);
+    fflush(stdin);
+    return val;
+}
+char prompt(const char *message)
+{
+    printf(message);
+    char ch = getchar();
+    fflush(stdin);
+    return ch;
+}
+int main()
+{
+  BSTNodeT *p;
+  int n, key;
+  char ch;
+
+  ch = prompt("Choose insert function:\n\t[R]ecursive\n\t[N]onrecursive: ");
+  printf("Number of nodes to insert= ");
+  scanf("%d", &n);
+  root = NULL;
+  for (int i = 0; i < n; i++)
+  {
+    key = getInt("\nKey= ");
+    if (toupper(ch) == 'R')
+      root = recInsert(root, key);
+    else
+      insert(key);
+  }
+  printf("\nPreorder listing\n");
+  preorder(root, 0);
+  while ('\n' != prompt("Press Enter to continue"));
+  printf("\nInorder listing\n");
+  inorder(root, 0);
+  while ('\n' != prompt("Press Enter to continue"));
+  printf("\nPostorder listing\n");
+  postorder(root, 0);
+  while ('\n' != prompt("Press Enter to continue"));
+  ch = prompt("Continue with find (Y/N)? ");
+  while (toupper(ch) == 'Y')
+  {
+    key = getInt("Key to find= ");
+    p = find(root, key);
+    if (p != NULL)
+      printf("Node found\n");
+    else
+      printf("Node NOT found\n");
+    ch = prompt("Continue with find (Y/N)? ");
+  }
+  ch = prompt("Continue with delete (Y/N)? ");
+  while (toupper(ch) == 'Y')
+  {
+    key = getInt("Key of node to delete= ");
+    root = delNode(root, key);
+    inorder(root, 0);
+    ch = prompt("Continue with delete (Y/N)? ");
+  }
+  ch = prompt("Delete the whole tree (Y/N)? ");
+  if (toupper(ch) == 'Y')
+  {
+    delTree(root);
+    root = NULL;
+    printf("Tree completely removed\n");
+  }
+  while ('\n' != prompt("Press Enter to exit program"));
+}

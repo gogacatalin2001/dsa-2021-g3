@@ -29,6 +29,11 @@ Deadline until 11.03.2021, 8:00 for making a PR on GitHub with the extra assignm
 Solve problem 4.2.
 Deadline until 17.03.2021, 20:00 for making a PR on GitHub with the mandatory problems and extra assignment if you finished the mandatory problems.
 
+### Lab05 Binary Search Trees
+
+Solve problem 5.2.
+Deadline until 24.03.2021, 20:00 for making a PR on GitHub with the mandatory problems and extra assignment if you finished the mandatory problems.
+
 ## Grading
 
 There will be 2 laboratory tests, one about Data Structures and one about Algorithms.
