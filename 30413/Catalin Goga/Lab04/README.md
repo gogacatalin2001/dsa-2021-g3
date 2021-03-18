@@ -1,5 +1,7 @@
-# Lab X
+# Lab 04 <Goga> <Catalin>
 
-> Edit this file and describe in a few words what you've done in this lab.
+> I've learned how to implement binary trees, what preorder, inorder and postorder traversals are,
+> and found out about balanced trees and arbitrary trees.
+> Added extra assignment
 
 
