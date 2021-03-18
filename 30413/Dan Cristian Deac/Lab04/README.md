@@ -1,5 +1,8 @@
-# Lab X
+# Lab 04
 
-> Edit this file and describe in a few words what you've done in this lab.
+
+> lab4DSAConsole is the working code where i read from and output to console.
+> lab4DSA contains the code where i  try to read from file and output to file but it doesnt work for some reason
+
 
 
