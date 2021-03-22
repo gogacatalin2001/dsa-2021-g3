@@ -176,7 +176,10 @@ void processInput(FILE *in, FILE *out, NodeT *root)
         switch(command[0])
         {
         case 'i':
-            insertNode(root, command[1]);
+            if(root == NULL)
+                root = createNode(command[1]);
+            else
+                insertNode(root, command[1]);
             break;
         case 'd':
             deleteNode(root, command[1]);
