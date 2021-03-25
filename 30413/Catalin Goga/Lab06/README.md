@@ -1,5 +1,6 @@
-# Lab X
+# Lab 06 Goga Catalin
 
-> Edit this file and describe in a few words what you've done in this lab.
+> I uploaded the mandatory problem.
+> In this lab I learned how to implement and use hash tables and how to create a hash function.
 
 
