@@ -1,5 +1,5 @@
-# Lab X
+# Lab 10 <Goga> <Catalin>
 
-> Edit this file and describe in a few words what you've done in this lab.
+> Shortest path problem using dynamic programming
 
 
